@@ -32,22 +32,177 @@
         body {
             background-color: #f8f8f4;
             color: #15321e;
+            overflow-x: hidden;
+        }
+        
+        /* Animated gradient background */
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f8f8f4 0%, #e8f5e9 25%, #fff9c4 50%, #f8f8f4 75%, #e1f5fe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        /* Floating animation for elements */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(2deg); }
+            66% { transform: translateY(-10px) rotate(-2deg); }
+        }
+        
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-30px) translateX(10px); }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .float-slow {
+            animation: floatSlow 8s ease-in-out infinite;
+        }
+        
+        /* Glowing pulse effect */
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(223, 255, 0, 0.3), 0 0 40px rgba(223, 255, 0, 0.2), 0 0 60px rgba(223, 255, 0, 0.1); }
+            50% { box-shadow: 0 0 30px rgba(223, 255, 0, 0.5), 0 0 60px rgba(223, 255, 0, 0.3), 0 0 90px rgba(223, 255, 0, 0.2); }
+        }
+        
+        .glow-effect {
+            animation: glow 3s ease-in-out infinite;
+        }
+        
+        /* Text gradient animation */
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #15321e 0%, #DFFF00 25%, #15321e 50%, #DFFF00 75%, #15321e 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShine 4s linear infinite;
+        }
+        
+        /* Morphing shapes */
+        @keyframes morph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 60% 30% 70% / 40% 50% 60% 50%; }
+            75% { border-radius: 70% 30% 50% 50% / 30% 70% 50% 60%; }
+        }
+        
+        .morph-shape {
+            animation: morph 8s ease-in-out infinite;
+        }
+        
+        /* Particle effect */
+        @keyframes particle {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+        }
+        
+        .particle {
+            animation: particle linear infinite;
+        }
+        
+        /* 3D tilt effect on hover */
+        .tilt-card {
+            transition: transform 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .tilt-card:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1.02);
+        }
+        
+        /* Reveal animation */
+        @keyframes reveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .reveal {
+            animation: reveal 1s ease-out forwards;
+        }
+        
+        .reveal-delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .reveal-delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .reveal-delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .reveal-delay-4 { animation-delay: 0.4s; opacity: 0; }
+        
+        /* Interactive button effects */
+        .btn-creative {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .btn-creative::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-creative:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-creative:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(21, 50, 30, 0.3);
         }
     </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col relative pb-4">
+<body class="antialiased min-h-screen flex flex-col relative pb-4 gradient-bg">
+    
+    <!-- Floating Particles Background -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="particle absolute w-3 h-3 bg-nubi-lime rounded-full opacity-60" style="left: 10%; animation-duration: 15s; animation-delay: 0s;"></div>
+        <div class="particle absolute w-2 h-2 bg-nubi-green rounded-full opacity-40" style="left: 20%; animation-duration: 20s; animation-delay: 2s;"></div>
+        <div class="particle absolute w-4 h-4 bg-nubi-lime rounded-full opacity-50" style="left: 30%; animation-duration: 18s; animation-delay: 4s;"></div>
+        <div class="particle absolute w-2 h-2 bg-nubi-green rounded-full opacity-30" style="left: 45%; animation-duration: 22s; animation-delay: 1s;"></div>
+        <div class="particle absolute w-3 h-3 bg-nubi-lime rounded-full opacity-60" style="left: 60%; animation-duration: 16s; animation-delay: 3s;"></div>
+        <div class="particle absolute w-2 h-2 bg-nubi-green rounded-full opacity-50" style="left: 75%; animation-duration: 19s; animation-delay: 5s;"></div>
+        <div class="particle absolute w-4 h-4 bg-nubi-lime rounded-full opacity-40" style="left: 85%; animation-duration: 21s; animation-delay: 2.5s;"></div>
+        <div class="particle absolute w-3 h-3 bg-nubi-green rounded-full opacity-30" style="left: 90%; animation-duration: 17s; animation-delay: 4.5s;"></div>
+    </div>
 
     <!-- Top Announcement Bar -->
-    <div class="bg-nubi-lime w-full py-2.5 text-center text-[11px] md:text-xs font-medium tracking-wide text-nubi-green cursor-pointer hover:underline">
-        Experience the future of digital identity. &rarr;
+    <div class="bg-nubi-lime w-full py-2.5 text-center text-[11px] md:text-xs font-medium tracking-wide text-nubi-green cursor-pointer hover:underline glow-effect relative z-10 transition-all hover:py-3">
+        <span class="inline-block hover:scale-105 transition-transform">✨ Experience the future of digital identity. &rarr;</span>
     </div>
 
     <!-- Navigation -->
-    <nav class="w-full px-6 py-5 md:px-12 flex justify-between items-center bg-nubi-cream sticky top-0 z-50">
+    <nav class="w-full px-6 py-5 md:px-12 flex justify-between items-center bg-nubi-cream/80 backdrop-blur-lg sticky top-0 z-50 border-b border-nubi-green/10">
         <div class="flex items-center gap-10">
             <!-- Logo -->
-            <a href="#" class="text-2xl font-bold tracking-tight flex items-baseline gap-1 text-nubi-green">
-                Nubi<span class="w-2.5 h-2.5 bg-nubi-green rounded-full"></span>
+            <a href="#" class="text-2xl font-bold tracking-tight flex items-baseline gap-1 text-nubi-green hover:scale-105 transition-transform">
+                Nubi<span class="w-2.5 h-2.5 bg-nubi-lime rounded-full glow-effect"></span>
             </a>
             
             <!-- Desktop Menu -->
@@ -61,62 +216,136 @@
         <!-- Right Menu -->
         <div class="flex items-center gap-6 md:gap-8">
             <a href="#" class="text-sm font-medium text-nubi-green/90 hover:opacity-70 transition-opacity hidden sm:block">Login</a>
-            <a href="#" class="bg-nubi-green text-white text-xs md:text-sm font-medium px-5 py-2.5 rounded-full hover:bg-opacity-90 transition-all">
+            <a href="#" class="bg-nubi-green text-white text-xs md:text-sm font-medium px-5 py-2.5 rounded-full btn-creative">
                 Get Started
             </a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <main class="flex-grow flex items-center justify-center px-6 md:px-12 py-8 md:py-16 max-w-[1600px] mx-auto w-full">
+    <main class="flex-grow flex items-center justify-center px-6 md:px-12 py-8 md:py-16 max-w-[1600px] mx-auto w-full relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
             
+            <!-- Decorative floating shapes -->
+            <div class="absolute top-20 left-10 w-32 h-32 bg-nubi-lime/20 rounded-full morph-shape blur-2xl float-animation"></div>
+            <div class="absolute bottom-32 right-20 w-40 h-40 bg-nubi-green/10 rounded-full morph-shape blur-3xl float-slow"></div>
+            <div class="absolute top-1/2 left-1/3 w-24 h-24 bg-nubi-lime/15 rounded-full morph-shape blur-2xl float-animation" style="animation-delay: 2s;"></div>
+            
             <!-- Left Content -->
-            <div class="flex flex-col items-start max-w-xl">
+            <div class="flex flex-col items-start max-w-xl relative z-10">
                 
                 <!-- Badge/Label -->
-                <div class="flex items-center gap-3 mb-6 md:mb-8">
-                    <span class="border border-nubi-green/40 rounded-full px-2 py-0.5 text-[10px] font-medium tracking-wider uppercase">
-                        V1.0
+                <div class="flex items-center gap-3 mb-6 md:mb-8 reveal reveal-delay-1">
+                    <span class="border-2 border-nubi-lime bg-nubi-lime/20 rounded-full px-3 py-1 text-[10px] font-bold tracking-wider uppercase glow-effect hover:scale-110 transition-transform cursor-pointer">
+                        🚀 V1.0
                     </span>
-                    <span class="text-lg md:text-xl text-nubi-green font-normal">Design System</span>
+                    <span class="text-lg md:text-xl text-nubi-green font-normal gradient-text">Design System</span>
                 </div>
 
                 <!-- Headline -->
-                <h1 class="text-5xl md:text-[4rem] lg:text-[4.5rem] leading-[1.05] font-medium text-nubi-green mb-6 md:mb-8 tracking-tight">
-                    Identity that glows as bright as your vision.
+                <h1 class="text-5xl md:text-[4rem] lg:text-[4.5rem] leading-[1.05] font-bold text-nubi-green mb-6 md:mb-8 tracking-tight reveal reveal-delay-2">
+                    Identity that <span class="gradient-text inline-block hover:scale-105 transition-transform">glows</span> as bright as your <span class="relative inline-block">
+                        <span class="relative z-10">vision</span>
+                        <span class="absolute bottom-2 left-0 w-full h-3 bg-nubi-lime/50 -rotate-1"></span>
+                    </span>.
                 </h1>
 
                 <!-- Subtext -->
-                <p class="text-base md:text-lg leading-relaxed text-nubi-green/80 mb-8 md:mb-10 max-w-md">
-                    Nubi transforms digital experiences through vibrant, glowing brand identity and modern geometric design systems built for the next generation.
+                <p class="text-base md:text-lg leading-relaxed text-nubi-green/80 mb-8 md:mb-10 max-w-md reveal reveal-delay-3">
+                    Nubi transforms digital experiences through <strong class="text-nubi-green font-semibold">vibrant, glowing</strong> brand identity and modern geometric design systems built for the <em class="not-italic text-nubi-green font-semibold">next generation</em>. ✨
                 </p>
 
                 <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
-                    <a href="#" class="bg-nubi-green text-white text-sm md:text-base font-medium px-8 py-4 rounded-full hover:bg-opacity-90 transition-all inline-flex items-center">
-                        Start Building
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 reveal reveal-delay-4">
+                    <a href="#" class="bg-nubi-green text-white text-sm md:text-base font-bold px-10 py-5 rounded-full btn-creative inline-flex items-center gap-2 shadow-lg">
+                        <span class="relative z-10">Start Building</span>
+                        <span class="relative z-10 text-xl">✨</span>
                     </a>
                     
-                    <a href="#" class="group flex items-center gap-1 text-nubi-green font-medium text-sm md:text-base">
-                        <span class="link-underline group-hover:border-nubi-green/50 transition-colors">View Showreel</span>
-                        <span class="transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+                    <a href="#" class="group flex items-center gap-2 text-nubi-green font-semibold text-sm md:text-base hover:gap-3 transition-all">
+                        <span class="link-underline group-hover:border-nubi-lime transition-colors">View Showreel</span>
+                        <span class="transform group-hover:translate-x-2 group-hover:scale-125 transition-all">▶</span>
                     </a>
+                </div>
+                
+                <!-- Stats/Social Proof -->
+                <div class="flex items-center gap-8 mt-12 reveal reveal-delay-4">
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-bold text-nubi-green gradient-text">10K+</div>
+                        <div class="text-xs text-nubi-green/60 mt-1">Active Users</div>
+                    </div>
+                    <div class="w-px h-10 bg-nubi-green/20"></div>
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-bold text-nubi-green gradient-text">4.9★</div>
+                        <div class="text-xs text-nubi-green/60 mt-1">User Rating</div>
+                    </div>
+                    <div class="w-px h-10 bg-nubi-green/20"></div>
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-bold text-nubi-green gradient-text">50+</div>
+                        <div class="text-xs text-nubi-green/60 mt-1">Countries</div>
+                    </div>
                 </div>
             </div>
 
             <!-- Right Content (Image) -->
             <div class="relative w-full flex justify-center lg:justify-end">
-                <!-- Using placeholder image to represent the capsule visual -->
-                <img src="https://placehold.co/800x800/f8f8f4/15321e?text=Nubi+Glowing+Identity" 
-                     alt="Nubi Identity System" 
-                     class="w-full max-w-md lg:max-w-full h-auto object-contain mix-blend-multiply">
+                <!-- 3D Interactive Card with Glow -->
+                <div class="relative tilt-card float-animation reveal reveal-delay-3 group">
+                    <!-- Glowing background orb -->
+                    <div class="absolute inset-0 bg-nubi-lime rounded-full blur-3xl opacity-30 glow-effect scale-110 group-hover:scale-125 transition-transform duration-500"></div>
+                    
+                    <!-- Main visual container -->
+                    <div class="relative bg-gradient-to-br from-nubi-green via-nubi-green to-nubi-dark rounded-[3rem] p-8 md:p-12 shadow-2xl border-4 border-nubi-lime/30 overflow-hidden">
+                        <!-- Animated background pattern -->
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="absolute top-10 left-10 w-20 h-20 border-4 border-nubi-lime rounded-full morph-shape"></div>
+                            <div class="absolute bottom-10 right-10 w-32 h-32 border-4 border-nubi-lime rounded-lg morph-shape" style="animation-delay: 1s;"></div>
+                            <div class="absolute top-1/2 left-1/2 w-16 h-16 border-4 border-nubi-lime rounded-full morph-shape" style="animation-delay: 2s;"></div>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="relative z-10 text-center space-y-6">
+                            <!-- Icon/Logo representation -->
+                            <div class="w-32 h-32 mx-auto bg-nubi-lime rounded-full flex items-center justify-center glow-effect morph-shape shadow-2xl">
+                                <span class="text-6xl font-black text-nubi-green">N</span>
+                            </div>
+                            
+                            <h3 class="text-2xl md:text-3xl font-bold text-white">Nubi Identity</h3>
+                            <p class="text-nubi-lime/80 text-sm md:text-base">Where design meets innovation</p>
+                            
+                            <!-- Feature pills -->
+                            <div class="flex flex-wrap justify-center gap-2 pt-4">
+                                <span class="bg-nubi-lime/20 text-nubi-lime border border-nubi-lime/30 px-3 py-1 rounded-full text-xs font-medium hover:scale-105 transition-transform cursor-pointer">Geometric</span>
+                                <span class="bg-nubi-lime/20 text-nubi-lime border border-nubi-lime/30 px-3 py-1 rounded-full text-xs font-medium hover:scale-105 transition-transform cursor-pointer">Modern</span>
+                                <span class="bg-nubi-lime/20 text-nubi-lime border border-nubi-lime/30 px-3 py-1 rounded-full text-xs font-medium hover:scale-105 transition-transform cursor-pointer">Vibrant</span>
+                            </div>
+                            
+                            <!-- Decorative elements -->
+                            <div class="flex justify-center gap-2 pt-4">
+                                <div class="w-2 h-2 bg-nubi-lime rounded-full glow-effect"></div>
+                                <div class="w-2 h-2 bg-nubi-lime rounded-full glow-effect" style="animation-delay: 0.5s;"></div>
+                                <div class="w-2 h-2 bg-nubi-lime rounded-full glow-effect" style="animation-delay: 1s;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating accent elements -->
+                    <div class="absolute -top-6 -right-6 w-24 h-24 bg-nubi-lime/40 rounded-full blur-xl float-slow"></div>
+                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-nubi-green/40 rounded-full blur-xl float-animation"></div>
+                </div>
             </div>
         </div>
     </main>
 
     <!-- Bottom Dark Strip (Peeking footer) -->
-    <div class="absolute bottom-0 left-0 w-full h-3 md:h-4 bg-nubi-dark rounded-t-[2rem]"></div>
+    <div class="absolute bottom-0 left-0 w-full h-3 md:h-4 bg-nubi-dark rounded-t-[2rem] shadow-2xl z-20"></div>
+    
+    <!-- Scroll indicator -->
+    <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30 animate-bounce">
+        <div class="w-6 h-10 border-2 border-nubi-green/50 rounded-full flex justify-center pt-2">
+            <div class="w-1 h-2 bg-nubi-lime rounded-full glow-effect"></div>
+        </div>
+    </div>
 
 </body>
 </html>
